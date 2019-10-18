@@ -1,0 +1,14 @@
+{
+    "name": "hexlet/example",
+    "authors": [
+        {
+            "name": "martipurpurpur",
+            "email": "marqari1a@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.3",
+        "slim/psr7": "^0.6.0",
+        "slim/http": "^0.8.0"
+    }
+}
