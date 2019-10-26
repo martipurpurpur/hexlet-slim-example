@@ -1,5 +1,5 @@
 <a href="/">hello</a>
-<a href="/users">all users</a>
+<a href="/users/new">create users</a>
 <form action="/users", method="GET">
     <input type="search" name="term" value="<?= htmlspecialchars($term) ?>" />
     <input type="submit" valeu="Search" />
@@ -7,7 +7,7 @@
 <?php foreach ($users as $user): ?>
 <ul>
     <li>
-        <?=htmlspecialchars($user) ?>
+        <?=htmlspecialchars($user['name']) ?>
     </li>
 </ul>
 <?php endforeach; ?>
