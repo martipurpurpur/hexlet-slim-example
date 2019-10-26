@@ -11,6 +11,8 @@
         "slim/psr7": "^0.6.0",
         "slim/http": "^0.8.0",
         "slim/php-view": "^2.2",
-        "php-di/php-di": "^6.0"
+        "php-di/php-di": "^6.0",
+        "tightenco/collect": "^6.4",
+        "danielstjules/stringy": "^3.1"
     }
 }

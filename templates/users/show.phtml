@@ -1,2 +1,13 @@
-<h1>Hello, <?= $nickname ?></h1>
-<p>your id is <?= $id ?></p>
+<a href="/">hello</a>
+<a href="/users">all users</a>
+<form action="/users", method="GET">
+    <input type="search" name="term" value="<?= htmlspecialchars($term) ?>" />
+    <input type="submit" valeu="Search" />
+</form>
+<?php foreach ($users as $user): ?>
+<ul>
+    <li>
+        <?=htmlspecialchars($user) ?>
+    </li>
+</ul>
+<?php endforeach; ?>
