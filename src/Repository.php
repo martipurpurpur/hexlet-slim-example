@@ -2,31 +2,56 @@
 
 namespace App;
 
+use function Stringy\create as s;
+
 class Repository
 {
-    public function __construct()
+    private $users;
+    public function __construct(array $users = [])
     {
-        session_start();
+        $this->users = $users;
     }
 
     public function all()
     {
-        return array_values($_SESSION);
+        $file = json_decode(file_get_contents('src/user.json'), TRUE);
+        $users = collect($file)->values()->all();
+        return $users;
     }
 
-    public function find(int $id)
+    public function findById(int $id)
     {
-        return $_SESSION[$id];
+        $file = json_decode(file_get_contents('src/user.json'), TRUE);
+        $findUser = collect($file)->firstWhere($id)->all();
+        return $findUser;
+    }
+    public function findByName($name)
+    {
+        $users = $this->all();
+        $findedUsers = collect($users)->filter(function ($user) use ($name) {
+            return s($user['name'])->startsWith($name, false);
+        })->all();
+        return $findedUsers;
     }
 
     public function save(array $user)
     {
-        if (empty($user['name']) || empty($user['email']) || empty($user['password']) || (($user['password'] !== $user['passwordConfirmation']))) {
+        if (empty($user['name']) ||
+            empty($user['email']) ||
+            empty($user['password']) ||
+            ($user['password'] !== $user['passwordConfirmation']))
+        {
             $json = json_encode($user);
             throw new \Exception("Wrong data: {$json}");
         }
-        $user['id'] = uniqid();
-        $_SESSION[$user['id']] = $user;
-        file_put_contents("src/user.json", json_encode($user));
+
+        $id = uniqid();
+        $file = file_get_contents('src/user.json');
+        $json = json_decode(($file), TRUE);
+        unset($file);
+        $json[$id] = $user;
+        file_put_contents('src/user.json', json_encode($json,
+            JSON_PRETTY_PRINT,
+            JSON_UNESCAPED_UNICODE));
     }
 }

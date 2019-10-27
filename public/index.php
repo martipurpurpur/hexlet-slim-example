@@ -2,7 +2,6 @@
 
 use Slim\Factory\AppFactory;
 use DI\Container;
-use function Stringy\create as s;
 use App\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -24,10 +23,7 @@ $app->get('/', function ($request, $response) {
 
 $app->get('/users', function ($request, $response) use ($repo) {
     $term = $request->getQueryParam('term');
-    $repo = $repo->all();
-    $users = collect($repo)->filter(function ($user) use ($term) {
-        return s($user['name'])->startsWith($term, false);
-    })->all();
+    $users = $repo->findByName($term);
     $params = [
        'users' => $users,
         'term' => $term
