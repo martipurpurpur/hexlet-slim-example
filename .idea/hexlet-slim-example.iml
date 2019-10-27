@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-handler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-middleware" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slim/flash" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/slim/http" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/slim/php-view" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/slim/psr7" />

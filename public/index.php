@@ -6,11 +6,16 @@ use App\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+session_start();
+
 $repo = new App\Repository();
 
 $container = new Container();
 $container->set('renderer', function () {
     return new \Slim\Views\PhpRenderer(__DIR__ . '/../templates');
+});
+$container->set('flash', function () {
+    return new \Slim\Flash\Messages();
 });
 
 AppFactory::setContainer($container);
@@ -24,9 +29,11 @@ $app->get('/', function ($request, $response) {
 $app->get('/users', function ($request, $response) use ($repo) {
     $term = $request->getQueryParam('term');
     $users = $repo->findByName($term);
+    $flash = $this->get('flash')->getMessages();
     $params = [
        'users' => $users,
-        'term' => $term
+        'term' => $term,
+        'flash' => $flash
     ];
     return $this->get('renderer')->render($response, "users/show.phtml", $params);
  });
@@ -43,9 +50,10 @@ $app->post('/users', function ($request, $response) use ($repo) {
     $validator = new Validator();
     $user = $request->getParsedBodyParam('user');
     $errors = $validator->validate($user);
+    $this->get('flash')->addMessage('success', 'User Added');
     $params = [
         'user' => $user,
-        'errors' => $errors
+        'errors' => $errors,
     ];
     if (empty($errors)) {
         $repo->save($user);
@@ -55,4 +63,8 @@ $app->post('/users', function ($request, $response) use ($repo) {
     return $this->get('renderer')->render($response->withStatus(422), "users/new.phtml", $params);
 });
 
+$app->post('/users/new', function ($request, $response) {
+    $this->get('flash')->addMessage('success', 'User Added');
+    return $response->withRedirect('/');
+});
 $app->run();
