@@ -6,12 +6,6 @@ use function Stringy\create as s;
 
 class Repository
 {
-    private $users;
-    public function __construct(array $users = [])
-    {
-        $this->users = $users;
-    }
-
     public function all()
     {
         $file = json_decode(file_get_contents('src/user.json'), TRUE);
@@ -28,10 +22,10 @@ class Repository
     public function findByName($name)
     {
         $users = $this->all();
-        $findedUsers = collect($users)->filter(function ($user) use ($name) {
+        $findUsers = collect($users)->filter(function ($user) use ($name) {
             return s($user['name'])->startsWith($name, false);
         })->all();
-        return $findedUsers;
+        return $findUsers;
     }
 
     public function save(array $user)
@@ -51,7 +45,6 @@ class Repository
         unset($file);
         $json[$id] = $user;
         file_put_contents('src/user.json', json_encode($json,
-            JSON_PRETTY_PRINT,
-            JSON_UNESCAPED_UNICODE));
+            JSON_PRETTY_PRINT));
     }
 }

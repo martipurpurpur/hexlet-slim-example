@@ -46,5 +46,11 @@
         "email": "1234@dfgh.com",
         "password": "123",
         "passwordConfirmation": "123"
+    },
+    "5db625e365f67": {
+        "name": "hello",
+        "email": "jan@123.com",
+        "password": "123",
+        "passwordConfirmation": "123"
     }
 }
