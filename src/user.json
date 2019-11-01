@@ -1,74 +1,23 @@
 {
-    "5db61bb7e7f58": {
+    "5dbcbb7a823c4": {
         "name": "marti",
-        "email": "marti@marti.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db61bc274cf1": {
-        "name": "123",
-        "email": "1234@dfgh.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db61d932ba0c": {
-        "name": "marti",
-        "email": "marti@marti.com",
+        "email": "admin@gghhh.com",
         "password": "1234",
-        "passwordConfirmation": "1234"
+        "passwordConfirmation": "1234",
+        "id": "5dbcbb7a823c4"
     },
-    "5db61e6934f56": {
-        "name": "nama",
-        "email": "nnnn@ail.com",
-        "password": "123",
-        "passwordConfirmation": "123"
+    "5dbcbf30d1739": {
+        "name": "marti2",
+        "email": "admin@gghhh.com",
+        "password": "1234",
+        "passwordConfirmation": "1234",
+        "id": "5dbcbf30d1739"
     },
-    "5db61ee7bae93": {
-        "name": "nama",
-        "email": "nnnn@ail.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db61f19c7a8e": {
-        "name": "m",
-        "email": "1234@dfgh.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db61f61be829": {
-        "name": "nnnn",
-        "email": "1234@dfgh.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db622d4ad01c": {
-        "name": "yeah",
-        "email": "1234@dfgh.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db625e365f67": {
-        "name": "hello",
-        "email": "jan@123.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db62a1edbca3": {
-        "name": "bbn",
-        "email": "marti@marti.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db62a8166c1f": {
-        "name": "nnnn",
-        "email": "marti@marti.com",
-        "password": "123",
-        "passwordConfirmation": "123"
-    },
-    "5db62ad7755c2": {
-        "name": "nm",
-        "email": "nnnn@ail.com",
-        "password": "123",
-        "passwordConfirmation": "123"
+    "5dbcbf4cbf606": {
+        "name": "fghj",
+        "email": "admin@gghhh.com",
+        "password": "1",
+        "passwordConfirmation": "1",
+        "id": "5dbcbf4cbf606"
     }
 }

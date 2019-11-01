@@ -13,10 +13,10 @@ class Repository
         return $users;
     }
 
-    public function findById(int $id)
+    public function findById($id)
     {
-        $file = json_decode(file_get_contents('src/user.json'), TRUE);
-        $findUser = collect($file)->firstWhere($id)->all();
+        $users = $this->all();
+        $findUser = collect($users)->firstWhere('id', $id);
         return $findUser;
     }
     public function findByName($name)
@@ -26,6 +26,13 @@ class Repository
             return s($user['name'])->startsWith($name, false);
         })->all();
         return $findUsers;
+    }
+
+    public function destroy($id) {
+        $users = json_decode(file_get_contents('src/user.json'), TRUE);
+        $usersWithDeleteUser = collect($users)->forget($id)->all();
+        file_put_contents('src/user.json', json_encode($usersWithDeleteUser,
+            JSON_PRETTY_PRINT));
     }
 
     public function save(array $user)
@@ -40,6 +47,7 @@ class Repository
         }
 
         $id = uniqid();
+        $user['id'] = $id;
         $file = file_get_contents('src/user.json');
         $json = json_decode(($file), TRUE);
         unset($file);

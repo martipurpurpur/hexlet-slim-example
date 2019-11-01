@@ -8,8 +8,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
 
-$repo = new App\Repository();
-
 $container = new Container();
 $container->set('renderer', function () {
     return new \Slim\Views\PhpRenderer(__DIR__ . '/../templates');
@@ -21,6 +19,10 @@ $container->set('flash', function () {
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 $app->addErrorMiddleware(true, true, true);
+$app->add(\Slim\Middleware\MethodOverrideMiddleware::class);
+
+$repo = new App\Repository();
+$router = $app->getRouteCollector()->getRouteParser();
 
 $app->get('/', function ($request, $response) {
     return $this->get('renderer')->render($response, "hello.phtml");
@@ -35,36 +37,90 @@ $app->get('/users', function ($request, $response) use ($repo) {
         'term' => $term,
         'flash' => $flash
     ];
-    return $this->get('renderer')->render($response, "users/show.phtml", $params);
- });
+    return $this->get('renderer')->render($response, "users/index.phtml", $params);
+ })->setName('users');
 
 $app->get('/users/new', function ($request, $response) {
     $params = [
-        'user' => [],
+        'userData' => [],
         'errors' => [],
     ];
     return $this->get('renderer')->render($response, "users/new.phtml", $params);
 });
 
-$app->post('/users', function ($request, $response) use ($repo) {
-    $validator = new Validator();
-    $user = $request->getParsedBodyParam('user');
-    $errors = $validator->validate($user);
+$app->post('/users/new', function ($request, $response) use ($router) {
     $this->get('flash')->addMessage('success', 'User Added');
+    return $response->withRedirect($router->urlFor('users'));
+});
+
+ $app->get('/users/{id}', function ($request, $response, $args) use ($repo) {
+    $id = $args['id'];
+    $user = $repo->findById($id);
+    if(!$user) {
+        $this->get('flash')->addMessage('success', 'Not Found');
+        return $response->withRedirect('/users');
+    }
     $params = [
-        'user' => $user,
+        'user' => $user
+    ];
+    return $this->get('renderer')->render($response, "users/show.phtml", $params);
+})->setName('user');
+
+$app->post('/users', function ($request, $response) use ($repo, $router) {
+    $validator = new Validator();
+    $userData = $request->getParsedBodyParam('user');
+    $errors = $validator->validate($userData);
+    $this->get('flash')->addMessage('success', 'User has been created');
+    $params = [
+        'userData' => $userData,
         'errors' => $errors,
     ];
     if (empty($errors)) {
-        $repo->save($user);
-        return $response->withHeader('Location', '/users')
+        $repo->save($userData);
+        return $response->withRedirect($router->urlFor('users'))
             ->withStatus(302);
     }
     return $this->get('renderer')->render($response->withStatus(422), "users/new.phtml", $params);
 });
 
-$app->post('/users/new', function ($request, $response) {
-    $this->get('flash')->addMessage('success', 'User Added');
-    return $response->withRedirect('/');
+$app->get('/users/{id}/edit', function ($request, $response, $args) use ($repo) {
+    $user = $repo->findById($args['id']);
+    $params = [
+        'user' => $user,
+        'userData' => $user
+    ];
+    return $this->get('renderer')->render($response, 'users/edit.phtml', $params);
 });
+
+$app->patch('/users/{id}', function ($request, $response, $args) use ($repo, $router) {
+    $user = $repo->findById($args['id']);
+    $userData = $request->getParsedBodyParam('user');
+
+    $validator = new App\Validator();
+    $errors = $validator->validate($userData);
+
+    if (empty($errors)) {
+        $user['name'] = $userData['name'];
+        $user['email'] = $userData['email'];
+        $user['password'] = $userData['password'];
+        $user['passwordConfirmation'] = $userData['passwordConfirmation'];
+        $repo->save($user);
+        $this->get('flash')->addMessage('success', 'User has been updated');
+        return $response->withRedirect($router->urlFor('users'));
+    }
+
+    $params = [
+        'user' => $user,
+        'userData' => $userData,
+        'errors' => $errors
+    ];
+    return $this->get('renderer')->render($response->withStatus(422), 'users/edit.phtml', $params);
+});
+
+$app->delete('/users/{id}', function ($request, $response, $args) use ($repo, $router) {
+    $repo->destroy($args['id']);
+    $this->get('flash')->addMessage('success', 'User has been deleted');
+    return $response->withRedirect($router->urlFor('users'));
+});
+
 $app->run();

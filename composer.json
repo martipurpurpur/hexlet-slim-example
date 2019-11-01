@@ -19,6 +19,7 @@
         "slim/flash": "*",
         "php-di/php-di": "^6.0",
         "tightenco/collect": "^6.4",
-        "danielstjules/stringy": "^3.1"
+        "danielstjules/stringy": "^3.1",
+      "ext-json": "*"
     }
 }

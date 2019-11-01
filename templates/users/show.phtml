@@ -1,21 +1,14 @@
-<a href="/">hello</a>
-<a href="/users/new">create users</a>
-<form action="/users", method="GET">
-    <input type="search" name="term" value="<?= htmlspecialchars($term) ?>" />
-    <input type="submit" value="Search" />
-</form>
-<?php foreach ($users as $user): ?>
-    <div>
-        <?=htmlspecialchars($user['name']) ?>
-    </div>
+<?php foreach ($user as $key => $value): ?>
+    <table>
+        <tr><td><?= $key ?> :</td><td><?= $value ?></td></tr>
+    </table>
 <?php endforeach; ?>
-
-<?php if (!empty($flash)) : ?>
-    <ul>
-        <?php foreach ($flash as $messages) : ?>
-            <?php foreach ($messages as $message) : ?>
-                <li><?= $message ?></li>
-            <?php endforeach ?>
-        <?php endforeach ?>
-    </ul>
-<?php endif ?>
+<div>
+    <form action="/users/<?= $user['id'] ?>/edit" method="get">
+        <input type="submit" value="Edit">
+    </form>
+    <form action="/users/<?= $user['id'] ?>" method="post">
+        <input type="hidden" name = "_METHOD" value="DELETE">
+        <input type="submit" value="Delete">
+    </form>
+</div>
