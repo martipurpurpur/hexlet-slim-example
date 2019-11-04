@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 hexlet-slim-example/
+web: vendor/bin/heroku-php-apache2 public/
