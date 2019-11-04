@@ -48,6 +48,8 @@ class Repository
 
         $id = uniqid();
         $user['id'] = $id;
+        $user['password'] = hash('sha256', $user['password']);
+        $user['passwordConfirmation'] = hash('sha256', $user['passwordConfirmation']);
         $file = file_get_contents('src/user.json');
         $json = json_decode(($file), TRUE);
         unset($file);

@@ -1,23 +1,37 @@
 {
-    "5dbcbb7a823c4": {
+    "5dbd6a830f085": {
+        "name": "admin",
+        "email": "1234@mail.ru",
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "passwordConfirmation": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "id": "5dbd6a830f085"
+    },
+    "5dbd6ab381742": {
         "name": "marti",
         "email": "admin@gghhh.com",
-        "password": "1234",
-        "passwordConfirmation": "1234",
-        "id": "5dbcbb7a823c4"
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "passwordConfirmation": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "id": "5dbd6ab381742"
     },
-    "5dbcbf30d1739": {
-        "name": "marti2",
+    "5dc03f25b5a29": {
+        "name": "marti",
         "email": "admin@gghhh.com",
-        "password": "1234",
-        "passwordConfirmation": "1234",
-        "id": "5dbcbf30d1739"
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "passwordConfirmation": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "id": "5dc03f25b5a29"
     },
-    "5dbcbf4cbf606": {
-        "name": "fghj",
+    "5dc03fb08f0c9": {
+        "name": "marti",
         "email": "admin@gghhh.com",
-        "password": "1",
-        "passwordConfirmation": "1",
-        "id": "5dbcbf4cbf606"
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "passwordConfirmation": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "id": "5dc03fb08f0c9"
+    },
+    "5dc03fd3e0b30": {
+        "name": "marti5",
+        "email": "admin@gghhh.com",
+        "password": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "passwordConfirmation": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "id": "5dc03fd3e0b30"
     }
 }
